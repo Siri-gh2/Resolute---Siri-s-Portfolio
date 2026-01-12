@@ -33,6 +33,7 @@ const Logo = styled(RouterNavLink)`
 
 const Links = styled.div`
   display: flex;
+  align-items: center;
   gap: 2rem;
 
   @media (max-width: 768px) {
@@ -54,6 +55,23 @@ const NavItem = styled(RouterNavLink)`
     opacity: 1;
     border-bottom: 2px solid ${({ theme }) => theme.colors.accent};
     padding-bottom: 4px;
+  }
+`;
+
+const ResumeLink = styled.a`
+  font-size: 0.9rem;
+  color: ${({ theme }) => theme.colors.text};
+  opacity: 0.85;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 0.45rem 1rem;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    opacity: 1;
+    color: ${({ theme }) => theme.colors.accent};
+    border-color: ${({ theme }) => theme.colors.accent};
   }
 `;
 
@@ -98,6 +116,12 @@ const MobileLink = styled(RouterNavLink)`
   }
 `;
 
+const MobileResume = styled.a`
+  font-size: 1rem;
+  color: ${({ theme }) => theme.colors.accent};
+  text-decoration: none;
+`;
+
 /* ================== Component ================== */
 
 export default function Navbar() {
@@ -107,7 +131,7 @@ export default function Navbar() {
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 40);
-      setOpen(false); // close menu on scroll
+      setOpen(false);
     };
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
@@ -123,6 +147,14 @@ export default function Navbar() {
         <NavItem to="/projects">Projects</NavItem>
         <NavItem to="/skills">Skills</NavItem>
         <NavItem to="/contact">Contact</NavItem>
+
+        <ResumeLink
+          href="/Siri_s_Resume.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Resume
+        </ResumeLink>
       </Links>
 
       {/* Mobile */}
@@ -148,6 +180,16 @@ export default function Navbar() {
           <MobileLink to="/contact" onClick={() => setOpen(false)}>
             Contact
           </MobileLink>
+
+          <MobileResume
+           href="/Siri_s_Resume.pdf"
+           target="_blank"
+           rel="noopener noreferrer"
+           onClick={() => setOpen(false)}
+           >
+  Resume
+</MobileResume>
+
         </MobileMenu>
       )}
     </Nav>
